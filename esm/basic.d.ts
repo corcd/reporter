@@ -6,6 +6,7 @@ export default class ReporterBasic {
     private _fetch;
     private _error;
     private _privacy;
-    private _checkRules;
+    private _checkXhrRules;
+    private _checkFetchRules;
     private _reportFactory;
 }

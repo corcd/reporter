@@ -2,7 +2,7 @@
  * @Author: Whzcorcd
  * @Date: 2020-10-28 09:12:47
  * @LastEditors: Whzcorcd
- * @LastEditTime: 2020-10-29 15:10:37
+ * @LastEditTime: 2020-10-30 17:23:03
  * @Description: file content
  */
 import * as Sentry from '@sentry/browser'
@@ -10,9 +10,10 @@ import ReporterBasic from './basic'
 import { IOptions, TApiRules, IInitOptions } from './types'
 
 class Reporter extends ReporterBasic {
+  private static singleInstance: Reporter | null = null
   public options: IOptions
 
-  constructor(options: IOptions) {
+  private constructor(options: IOptions) {
     const _filterUrls: Array<string> = [
       '/sockjs-node/info',
       'arms-retcode.aliyuncs.com',
@@ -107,6 +108,13 @@ class Reporter extends ReporterBasic {
     Sentry.setTag('Appid', <string>this.options.appid)
   }
 
+  static getInstance(options: IOptions): Reporter {
+    if (!this.singleInstance) {
+      this.singleInstance = new Reporter(options)
+    }
+    return this.singleInstance
+  }
+
   public init(options: IInitOptions): void {
     const _options = {
       // Sentry dsn
@@ -178,7 +186,7 @@ class Reporter extends ReporterBasic {
     Sentry.setTag('Uin', String(uin))
     Sentry.setTag('Appid', appid)
     Sentry.setExtra('data', data)
-    Sentry.captureException(new Error(`Api Error:${msg}`))
+    Sentry.captureException(new Error(`API 手动捕捉 ${msg}`))
   }
 
   public info(
@@ -214,4 +222,5 @@ class Reporter extends ReporterBasic {
   }
 }
 
-export default Reporter
+const reporter = (options: IOptions): Reporter => Reporter.getInstance(options)
+export default reporter

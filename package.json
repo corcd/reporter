@@ -1,12 +1,12 @@
 {
   "name": "@gdyfe/reporter",
-  "version": "1.2.1",
+  "version": "1.2.12",
   "description": "Guangdianyun frontend report tool",
   "publishConfig": {
     "access": "public"
   },
   "main": "esm/index.js",
-  "repository": "https://github.com/corcd/gdy-sentry-plugin.git",
+  "repository": "https://github.com/corcd/reporter.git",
   "author": "Whzcorcd <whzcorcd@gmail.com>",
   "license": "ISC",
   "private": false,
@@ -19,7 +19,7 @@
     "frontend",
     "reporter"
   ],
-  "homepage": "https://github.com/corcd/gdy-sentry-plugin",
+  "homepage": "https://github.com/corcd/reporter",
   "dependencies": {
     "@sentry/browser": "5.15.5",
     "ajax-hook": "^2.0.3"

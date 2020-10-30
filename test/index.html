@@ -2,7 +2,7 @@
  * @Author: Whzcorcd
  * @Date: 2020-06-09 15:08:06
  * @LastEditors: Whzcorcd
- * @LastEditTime: 2020-10-29 15:58:18
+ * @LastEditTime: 2020-10-30 17:05:41
  * @Description: file content
 -->
 <!DOCTYPE html>
@@ -18,7 +18,7 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="../dist/reporter.min.js"></script>
   <script>
-    new reporter({
+    reporter({
       dsn: 'https://1b367c5e91974fa981ee4f8d5d4cc383@sentry.guangdianyun.tv/35',
       version: '1.0.0',
       env: 'TEST',
@@ -61,6 +61,7 @@
     <div class="clice"><button id="button1">同步点击错误上报按钮</button></div>
     <div class="clice" style="margin-top:20px;"><button id="button2">异步点击错误上报按钮</button></div>
     <div class="clice" style="margin-top:20px;"><button id="button3">Ajax</button></div>
+    <div class="clice" style="margin-top:20px;"><button id="button4">Fetch</button></div>
   </div>
   <script>
     $('#button1').click(() => {
@@ -124,6 +125,70 @@
           // console.log(data)
         }
       })
+    })
+    $('#button4').click(() => {
+      fetch('http://127.0.0.1:9000/test/gdy/normal', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((response) => {
+          return response.json()
+        })
+        .then((myJson) => {
+          console.log(myJson)
+        })
+
+      fetch('http://127.0.0.1:9000/test/gdy/notlogin', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((response) => {
+          return response.json()
+        })
+        .then((myJson) => {
+          console.log(myJson)
+        })
+
+      fetch('http://127.0.0.1:9000/test/gdy/other', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((response) => {
+          return response.json()
+        })
+        .then((myJson) => {
+          console.log(myJson)
+        })
+
+      fetch('http://127.0.0.1:9000/test/gdy/', {
+          method: 'GET',
+          headers: {}
+        })
+        .then((response) => {
+          return response.json()
+        })
+        .then((myJson) => {
+          console.log(myJson)
+        })
+
+      fetch('http://127.0.0.1:9000/test/gdy/servererror', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((response) => {
+          return response.json()
+        })
+        .then((myJson) => {
+          console.log(myJson)
+        })
     })
   </script>
 </body>

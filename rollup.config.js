@@ -2,7 +2,7 @@
  * @Author: Whzcorcd
  * @Date: 2020-10-28 17:15:14
  * @LastEditors: Whzcorcd
- * @LastEditTime: 2020-10-28 17:36:41
+ * @LastEditTime: 2020-10-30 17:34:02
  * @Description: file content
  */
 import typescript from '@rollup/plugin-typescript'
@@ -45,7 +45,7 @@ export default {
   plugins: [
     resolve(),
     typescript({
-      tsconfig: 'tsconfig.json',
+      tsconfig: 'rollup.tsconfig.json',
     }),
   ],
 }

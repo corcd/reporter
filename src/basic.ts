@@ -2,7 +2,7 @@
  * @Author: Whzcorcd
  * @Date: 2020-10-28 09:26:11
  * @LastEditors: Whzcorcd
- * @LastEditTime: 2020-10-29 15:07:56
+ * @LastEditTime: 2020-10-30 18:08:01
  * @Description: file content
  */
 import * as Sentry from '@sentry/browser'
@@ -38,7 +38,6 @@ export default class ReporterBasic {
       // 请求发生错误时进入，比如超时；注意，不包括 http 状态码错误，如 404 仍然会认为请求成功
       onError: (err, handler) => {
         if (!(<string[]>this._options.filterUrls).includes(err.config.url)) {
-          console.error(err)
           console.log('API 错误被捕捉', err.config.url)
           this._reportFactory('error', 'API 错误被捕捉', 'Error', err)
         }
@@ -49,7 +48,7 @@ export default class ReporterBasic {
         if (
           !(<string[]>this._options.filterUrls).includes(response.config.url)
         ) {
-          const res = this._checkRules(response)
+          const res = this._checkXhrRules(response)
           if (res) {
             console.log('API 不符合规则被捕捉', response.config.url)
             this._reportFactory(
@@ -65,7 +64,76 @@ export default class ReporterBasic {
     })
   }
 
-  private _fetch(): void {}
+  private _fetch(): void {
+    const intercept = async (response: Response): Promise<Response> => {
+      if (!response.body) return response
+
+      const _this = this
+      const reader = (<ReadableStream>response.body).getReader()
+      const stream = new ReadableStream({
+        start(controller) {
+          function push(): void {
+            // "done" 是一个布尔型，"value" 是一个 Unit8Array
+            reader.read().then(e => {
+              const { done, value } = e
+              // 判断是否还有可读的数据
+              const decodedValue = new TextDecoder('utf-8').decode(value)
+
+              if (done) {
+                // 告诉浏览器已经结束数据发送
+                controller.close()
+                return
+              }
+
+              // console.log(done, decodedValue)
+              try {
+                const data = value ? JSON.parse(decodedValue) : {}
+                const res = _this._checkFetchRules(response, data)
+
+                if (res) {
+                  console.log('API 不符合规则被捕捉', response.url)
+                  _this._reportFactory(
+                    'error',
+                    'API 不符合规则被捕捉',
+                    'Response',
+                    response
+                  )
+                }
+              } catch (err) {
+                // 非 json 返回值
+                console.log('API 不符合规则被捕捉', response.url)
+                _this._reportFactory(
+                  'error',
+                  'API 不符合规则被捕捉',
+                  'Response',
+                  response
+                )
+              }
+              // 取得数据并将它通过 controller 发送给浏览器
+              controller.enqueue(value)
+              push()
+            })
+          }
+          push()
+        },
+      })
+      return new Response(stream, {
+        headers: response.headers,
+      })
+    }
+
+    const originFetch = fetch
+    Object.defineProperty(window, 'fetch', {
+      configurable: true,
+      enumerable: true,
+      get() {
+        return (url: string, options: any) => {
+          return originFetch(url, { ...options }).then(intercept)
+        }
+      },
+      set() {},
+    })
+  }
 
   private _error(): void {
     // img, script, css, jsonp
@@ -130,8 +198,9 @@ export default class ReporterBasic {
       }
     )
     // 重写 console.error
+    const _this = this
     const oldError = console.error
-    console.error = (e: ErrorEvent): void => {
+    console.error = function (e: ErrorEvent): void {
       setTimeout((): void => {
         const data = {
           t: new Date().getTime(),
@@ -139,7 +208,7 @@ export default class ReporterBasic {
           resourceUrl: location.href,
         }
         // 上报错误信息
-        this._reportFactory('error', '控制台错误提示', 'Stack', data)
+        _this._reportFactory('error', '控制台错误提示', 'Stack', data)
       }, 0)
       return oldError.apply(console, (arguments as unknown) as any[])
     }
@@ -156,18 +225,20 @@ export default class ReporterBasic {
     this._reportFactory('info', 'Cookies 记录', 'Cookies', res)
   }
 
-  private _checkRules(response: XhrResponse): boolean {
+  private _checkXhrRules(response: XhrResponse): boolean {
     // true 为标记，false为忽略
+    // TODO response 为空处理
+
     const ruleObject = (this._options.apiRules as Array<
       TApiRules
     >).filter(item => response.config.url.includes(item.url))
 
     if (!ruleObject) {
-      console.error('当前缺少匹配的规则')
+      console.log('当前缺少匹配的规则')
       return false
     }
     if (ruleObject.length > 1) {
-      console.error('API 规则定义重复, 将取最先定义项作为规则')
+      console.log('API 规则定义重复, 将取最先定义项作为规则')
     }
 
     const rules = ruleObject[0].rules ? ruleObject[0].rules : null
@@ -186,6 +257,48 @@ export default class ReporterBasic {
         const permission = map.get(key)
         if (permission && permission.length === 0) return true
         if (permission && permission.indexOf(rep[key]) >= 0) return true
+        else return false
+      }
+    })
+    if (match.some(value => value === false)) return true
+    return false
+  }
+
+  private _checkFetchRules(response: Response, data: any = {}): boolean {
+    // true 为标记，false 为忽略
+    // TODO response 为空处理
+    if (Object.keys(data).length === 0) return false
+    if (response.url.includes('sentry_key')) return false
+
+    const ruleObject = (this._options.apiRules as Array<
+      TApiRules
+    >).filter(item => response.url.includes(item.url))
+
+    if (!ruleObject) {
+      console.log('当前缺少匹配的规则')
+      return false
+    }
+    if (ruleObject.length > 1) {
+      console.log('API 规则定义重复, 将取最先定义项作为规则')
+    }
+
+    const rules = ruleObject[0].rules ? ruleObject[0].rules : null
+    if (!rules || !Array.isArray(rules)) return false
+
+    // http 状态码判断
+    if (response.status < 200 || response.status >= 400) return true
+    // 允许值判断
+    const map = new Map(
+      rules.map((item: TApiRulesItem) => [item.name, item.permission])
+    )
+    const match = Object.keys(data).map(key => {
+      if (map.has(key)) {
+        // true 为通过，false 为不通过
+        const permission = map.get(key)
+
+        if (permission && permission.length === 0) return true
+
+        if (permission && permission.indexOf(data[key]) >= 0) return true
         else return false
       }
     })

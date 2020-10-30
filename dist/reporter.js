@@ -20,7 +20,7 @@ var reporter = (function () {
     var extendStatics = function(d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
 
@@ -39,6 +39,84 @@ var reporter = (function () {
             return t;
         };
         return __assign.apply(this, arguments);
+    };
+
+    function __awaiter(thisArg, _arguments, P, generator) {
+        function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    }
+
+    function __generator(thisArg, body) {
+        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f) throw new TypeError("Generator is already executing.");
+            while (_) try {
+                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+                if (y = 0, t) op = [op[0] & 2, t.value];
+                switch (op[0]) {
+                    case 0: case 1: t = op; break;
+                    case 4: _.label++; return { value: op[1], done: false };
+                    case 5: _.label++; y = op[1]; op = [0]; continue;
+                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                    default:
+                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                        if (t[2]) _.ops.pop();
+                        _.trys.pop(); continue;
+                }
+                op = body.call(thisArg, _);
+            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    }
+
+    /*! *****************************************************************************
+    Copyright (c) Microsoft Corporation.
+
+    Permission to use, copy, modify, and/or distribute this software for any
+    purpose with or without fee is hereby granted.
+
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+    PERFORMANCE OF THIS SOFTWARE.
+    ***************************************************************************** */
+    /* global Reflect, Promise */
+
+    var extendStatics$1 = function(d, b) {
+        extendStatics$1 = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics$1(d, b);
+    };
+
+    function __extends$1(d, b) {
+        extendStatics$1(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
+
+    var __assign$1 = function() {
+        __assign$1 = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign$1.apply(this, arguments);
     };
 
     function __read(o, n) {
@@ -210,15 +288,15 @@ var reporter = (function () {
     PERFORMANCE OF THIS SOFTWARE.
     ***************************************************************************** */
 
-    var __assign$1 = function() {
-        __assign$1 = Object.assign || function __assign(t) {
+    var __assign$2 = function() {
+        __assign$2 = Object.assign || function __assign(t) {
             for (var s, i = 1, n = arguments.length; i < n; i++) {
                 s = arguments[i];
                 for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
             }
             return t;
         };
-        return __assign$1.apply(this, arguments);
+        return __assign$2.apply(this, arguments);
     };
 
     function __read$2(o, n) {
@@ -260,28 +338,28 @@ var reporter = (function () {
     ***************************************************************************** */
     /* global Reflect, Promise */
 
-    var extendStatics$1 = function(d, b) {
-        extendStatics$1 = Object.setPrototypeOf ||
+    var extendStatics$2 = function(d, b) {
+        extendStatics$2 = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics$1(d, b);
+        return extendStatics$2(d, b);
     };
 
-    function __extends$1(d, b) {
-        extendStatics$1(d, b);
+    function __extends$2(d, b) {
+        extendStatics$2(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     }
 
-    var __assign$2 = function() {
-        __assign$2 = Object.assign || function __assign(t) {
+    var __assign$3 = function() {
+        __assign$3 = Object.assign || function __assign(t) {
             for (var s, i = 1, n = arguments.length; i < n; i++) {
                 s = arguments[i];
                 for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
             }
             return t;
         };
-        return __assign$2.apply(this, arguments);
+        return __assign$3.apply(this, arguments);
     };
 
     function __values(o) {
@@ -337,7 +415,7 @@ var reporter = (function () {
 
     /** An error emitted by Sentry SDKs and related utilities. */
     var SentryError = /** @class */ (function (_super) {
-        __extends$1(SentryError, _super);
+        __extends$2(SentryError, _super);
         function SentryError(message) {
             var _newTarget = this.constructor;
             var _this = _super.call(this, message) || this;
@@ -1804,12 +1882,12 @@ var reporter = (function () {
                     },
                     startTimestamp: Date.now(),
                 };
-                triggerHandlers('fetch', __assign$2({}, commonHandlerData));
+                triggerHandlers('fetch', __assign$3({}, commonHandlerData));
                 return originalFetch.apply(global$2, args).then(function (response) {
-                    triggerHandlers('fetch', __assign$2({}, commonHandlerData, { endTimestamp: Date.now(), response: response }));
+                    triggerHandlers('fetch', __assign$3({}, commonHandlerData, { endTimestamp: Date.now(), response: response }));
                     return response;
                 }, function (error) {
-                    triggerHandlers('fetch', __assign$2({}, commonHandlerData, { endTimestamp: Date.now(), error: error }));
+                    triggerHandlers('fetch', __assign$3({}, commonHandlerData, { endTimestamp: Date.now(), error: error }));
                     throw error;
                 });
             };
@@ -1873,7 +1951,7 @@ var reporter = (function () {
                     startTimestamp: Date.now(),
                     xhr: xhr,
                 };
-                triggerHandlers('xhr', __assign$2({}, commonHandlerData));
+                triggerHandlers('xhr', __assign$3({}, commonHandlerData));
                 xhr.addEventListener('readystatechange', function () {
                     if (xhr.readyState === 4) {
                         try {
@@ -1886,7 +1964,7 @@ var reporter = (function () {
                         catch (e) {
                             /* do nothing */
                         }
-                        triggerHandlers('xhr', __assign$2({}, commonHandlerData, { endTimestamp: Date.now() }));
+                        triggerHandlers('xhr', __assign$3({}, commonHandlerData, { endTimestamp: Date.now() }));
                     }
                 });
                 return originalSend.apply(this, args);
@@ -2251,7 +2329,7 @@ var reporter = (function () {
                     resolve(event);
                 }
                 else {
-                    var result = processor(__assign$1({}, event), hint);
+                    var result = processor(__assign$2({}, event), hint);
                     if (isThenable(result)) {
                         result
                             .then(function (final) { return _this._notifyEventProcessors(processors, final, hint, index + 1).then(resolve); })
@@ -2277,7 +2355,7 @@ var reporter = (function () {
          * @inheritDoc
          */
         Scope.prototype.setTags = function (tags) {
-            this._tags = __assign$1({}, this._tags, tags);
+            this._tags = __assign$2({}, this._tags, tags);
             this._notifyScopeListeners();
             return this;
         };
@@ -2286,7 +2364,7 @@ var reporter = (function () {
          */
         Scope.prototype.setTag = function (key, value) {
             var _a;
-            this._tags = __assign$1({}, this._tags, (_a = {}, _a[key] = value, _a));
+            this._tags = __assign$2({}, this._tags, (_a = {}, _a[key] = value, _a));
             this._notifyScopeListeners();
             return this;
         };
@@ -2294,7 +2372,7 @@ var reporter = (function () {
          * @inheritDoc
          */
         Scope.prototype.setExtras = function (extras) {
-            this._extra = __assign$1({}, this._extra, extras);
+            this._extra = __assign$2({}, this._extra, extras);
             this._notifyScopeListeners();
             return this;
         };
@@ -2303,7 +2381,7 @@ var reporter = (function () {
          */
         Scope.prototype.setExtra = function (key, extra) {
             var _a;
-            this._extra = __assign$1({}, this._extra, (_a = {}, _a[key] = extra, _a));
+            this._extra = __assign$2({}, this._extra, (_a = {}, _a[key] = extra, _a));
             this._notifyScopeListeners();
             return this;
         };
@@ -2339,7 +2417,7 @@ var reporter = (function () {
          */
         Scope.prototype.setContext = function (key, context) {
             var _a;
-            this._context = __assign$1({}, this._context, (_a = {}, _a[key] = context, _a));
+            this._context = __assign$2({}, this._context, (_a = {}, _a[key] = context, _a));
             this._notifyScopeListeners();
             return this;
         };
@@ -2366,9 +2444,9 @@ var reporter = (function () {
             var newScope = new Scope();
             if (scope) {
                 newScope._breadcrumbs = __spread$2(scope._breadcrumbs);
-                newScope._tags = __assign$1({}, scope._tags);
-                newScope._extra = __assign$1({}, scope._extra);
-                newScope._context = __assign$1({}, scope._context);
+                newScope._tags = __assign$2({}, scope._tags);
+                newScope._extra = __assign$2({}, scope._extra);
+                newScope._context = __assign$2({}, scope._context);
                 newScope._user = scope._user;
                 newScope._level = scope._level;
                 newScope._span = scope._span;
@@ -2398,7 +2476,7 @@ var reporter = (function () {
          * @inheritDoc
          */
         Scope.prototype.addBreadcrumb = function (breadcrumb, maxBreadcrumbs) {
-            var mergedBreadcrumb = __assign$1({ timestamp: timestampWithMs() }, breadcrumb);
+            var mergedBreadcrumb = __assign$2({ timestamp: timestampWithMs() }, breadcrumb);
             this._breadcrumbs =
                 maxBreadcrumbs !== undefined && maxBreadcrumbs >= 0
                     ? __spread$2(this._breadcrumbs, [mergedBreadcrumb]).slice(-maxBreadcrumbs)
@@ -2444,16 +2522,16 @@ var reporter = (function () {
          */
         Scope.prototype.applyToEvent = function (event, hint) {
             if (this._extra && Object.keys(this._extra).length) {
-                event.extra = __assign$1({}, this._extra, event.extra);
+                event.extra = __assign$2({}, this._extra, event.extra);
             }
             if (this._tags && Object.keys(this._tags).length) {
-                event.tags = __assign$1({}, this._tags, event.tags);
+                event.tags = __assign$2({}, this._tags, event.tags);
             }
             if (this._user && Object.keys(this._user).length) {
-                event.user = __assign$1({}, this._user, event.user);
+                event.user = __assign$2({}, this._user, event.user);
             }
             if (this._context && Object.keys(this._context).length) {
-                event.contexts = __assign$1({}, this._context, event.contexts);
+                event.contexts = __assign$2({}, this._context, event.contexts);
             }
             if (this._level) {
                 event.level = this._level;
@@ -2462,7 +2540,7 @@ var reporter = (function () {
                 event.transaction = this._transaction;
             }
             if (this._span) {
-                event.contexts = __assign$1({ trace: this._span.getTraceContext() }, event.contexts);
+                event.contexts = __assign$2({ trace: this._span.getTraceContext() }, event.contexts);
             }
             this._applyFingerprint(event);
             event.breadcrumbs = __spread$2((event.breadcrumbs || []), this._breadcrumbs);
@@ -2633,7 +2711,7 @@ var reporter = (function () {
                     syntheticException: syntheticException,
                 };
             }
-            this._invokeClient('captureException', exception, __assign$1({}, finalHint, { event_id: eventId }));
+            this._invokeClient('captureException', exception, __assign$2({}, finalHint, { event_id: eventId }));
             return eventId;
         };
         /**
@@ -2659,7 +2737,7 @@ var reporter = (function () {
                     syntheticException: syntheticException,
                 };
             }
-            this._invokeClient('captureMessage', message, level, __assign$1({}, finalHint, { event_id: eventId }));
+            this._invokeClient('captureMessage', message, level, __assign$2({}, finalHint, { event_id: eventId }));
             return eventId;
         };
         /**
@@ -2667,7 +2745,7 @@ var reporter = (function () {
          */
         Hub.prototype.captureEvent = function (event, hint) {
             var eventId = (this._lastEventId = uuid4());
-            this._invokeClient('captureEvent', event, __assign$1({}, hint, { event_id: eventId }));
+            this._invokeClient('captureEvent', event, __assign$2({}, hint, { event_id: eventId }));
             return eventId;
         };
         /**
@@ -2689,7 +2767,7 @@ var reporter = (function () {
                 return;
             }
             var timestamp = timestampWithMs();
-            var mergedBreadcrumb = __assign$1({ timestamp: timestamp }, breadcrumb);
+            var mergedBreadcrumb = __assign$2({ timestamp: timestamp }, breadcrumb);
             var finalBreadcrumb = beforeBreadcrumb
                 ? consoleSandbox(function () { return beforeBreadcrumb(mergedBreadcrumb, hint); })
                 : mergedBreadcrumb;
@@ -3141,15 +3219,15 @@ var reporter = (function () {
     PERFORMANCE OF THIS SOFTWARE.
     ***************************************************************************** */
 
-    var __assign$3 = function() {
-        __assign$3 = Object.assign || function __assign(t) {
+    var __assign$4 = function() {
+        __assign$4 = Object.assign || function __assign(t) {
             for (var s, i = 1, n = arguments.length; i < n; i++) {
                 s = arguments[i];
                 for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
             }
             return t;
         };
-        return __assign$3.apply(this, arguments);
+        return __assign$4.apply(this, arguments);
     };
 
     function __read$4(o, n) {
@@ -3459,7 +3537,7 @@ var reporter = (function () {
         BaseClient.prototype._prepareEvent = function (event, scope, hint) {
             var _this = this;
             var _a = this.getOptions(), environment = _a.environment, release = _a.release, dist = _a.dist, _b = _a.maxValueLength, maxValueLength = _b === void 0 ? 250 : _b, _c = _a.normalizeDepth, normalizeDepth = _c === void 0 ? 3 : _c;
-            var prepared = __assign$3({}, event);
+            var prepared = __assign$4({}, event);
             if (prepared.environment === undefined && environment !== undefined) {
                 prepared.environment = environment;
             }
@@ -3515,8 +3593,8 @@ var reporter = (function () {
                 return null;
             }
             // tslint:disable:no-unsafe-any
-            return __assign$3({}, event, (event.breadcrumbs && {
-                breadcrumbs: event.breadcrumbs.map(function (b) { return (__assign$3({}, b, (b.data && {
+            return __assign$4({}, event, (event.breadcrumbs && {
+                breadcrumbs: event.breadcrumbs.map(function (b) { return (__assign$4({}, b, (b.data && {
                     data: normalize(b.data, depth),
                 }))); }),
             }), (event.user && {
@@ -4082,7 +4160,7 @@ var reporter = (function () {
     /** Remove N number of frames from the stack */
     function popFrames(stacktrace, popSize) {
         try {
-            return __assign({}, stacktrace, { stack: stacktrace.stack.slice(popSize) });
+            return __assign$1({}, stacktrace, { stack: stacktrace.stack.slice(popSize) });
         }
         catch (e) {
             return stacktrace;
@@ -4291,7 +4369,7 @@ var reporter = (function () {
     var global$3 = getGlobalObject();
     /** `fetch` based transport */
     var FetchTransport = /** @class */ (function (_super) {
-        __extends(FetchTransport, _super);
+        __extends$1(FetchTransport, _super);
         function FetchTransport() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
             /** Locks transport after receiving 429 response */
@@ -4346,7 +4424,7 @@ var reporter = (function () {
 
     /** `XHR` based transport */
     var XHRTransport = /** @class */ (function (_super) {
-        __extends(XHRTransport, _super);
+        __extends$1(XHRTransport, _super);
         function XHRTransport() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
             /** Locks transport after receiving 429 response */
@@ -4400,7 +4478,7 @@ var reporter = (function () {
      * @hidden
      */
     var BrowserBackend = /** @class */ (function (_super) {
-        __extends(BrowserBackend, _super);
+        __extends$1(BrowserBackend, _super);
         function BrowserBackend() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
@@ -4412,7 +4490,7 @@ var reporter = (function () {
                 // We return the noop transport here in case there is no Dsn.
                 return _super.prototype._setupTransport.call(this);
             }
-            var transportOptions = __assign({}, this._options.transportOptions, { dsn: this._options.dsn });
+            var transportOptions = __assign$1({}, this._options.transportOptions, { dsn: this._options.dsn });
             if (this._options.transport) {
                 return new this._options.transport(transportOptions);
             }
@@ -4467,7 +4545,7 @@ var reporter = (function () {
      * @see SentryClient for usage documentation.
      */
     var BrowserClient = /** @class */ (function (_super) {
-        __extends(BrowserClient, _super);
+        __extends$1(BrowserClient, _super);
         /**
          * Creates a new Browser SDK instance.
          *
@@ -4482,7 +4560,7 @@ var reporter = (function () {
          */
         BrowserClient.prototype._prepareEvent = function (event, scope, hint) {
             event.platform = event.platform || 'javascript';
-            event.sdk = __assign({}, event.sdk, { name: SDK_NAME, packages: __spread(((event.sdk && event.sdk.packages) || []), [
+            event.sdk = __assign$1({}, event.sdk, { name: SDK_NAME, packages: __spread(((event.sdk && event.sdk.packages) || []), [
                     {
                         name: 'npm:@sentry/browser',
                         version: SDK_VERSION,
@@ -4600,12 +4678,12 @@ var reporter = (function () {
                 ignoreNextOnError();
                 withScope(function (scope) {
                     scope.addEventProcessor(function (event) {
-                        var processedEvent = __assign({}, event);
+                        var processedEvent = __assign$1({}, event);
                         if (options.mechanism) {
                             addExceptionTypeValue(processedEvent, undefined, undefined);
                             addExceptionMechanism(processedEvent, options.mechanism);
                         }
-                        processedEvent.extra = __assign({}, processedEvent.extra, { arguments: args });
+                        processedEvent.extra = __assign$1({}, processedEvent.extra, { arguments: args });
                         return processedEvent;
                     });
                     captureException(ex);
@@ -4670,7 +4748,7 @@ var reporter = (function () {
             this._onErrorHandlerInstalled = false;
             /** JSDoc */
             this._onUnhandledRejectionHandlerInstalled = false;
-            this._options = __assign({ onerror: true, onunhandledrejection: true }, options);
+            this._options = __assign$1({ onerror: true, onunhandledrejection: true }, options);
         }
         /**
          * @inheritDoc
@@ -5041,7 +5119,7 @@ var reporter = (function () {
              * @inheritDoc
              */
             this.name = Breadcrumbs.id;
-            this._options = __assign({ console: true, dom: true, fetch: true, history: true, sentry: true, xhr: true }, options);
+            this._options = __assign$1({ console: true, dom: true, fetch: true, history: true, sentry: true, xhr: true }, options);
         }
         /**
          * Creates breadcrumbs from console API calls
@@ -5145,7 +5223,7 @@ var reporter = (function () {
             if (handlerData.error) {
                 getCurrentHub().addBreadcrumb({
                     category: 'fetch',
-                    data: __assign({}, handlerData.fetchData, { status_code: handlerData.response.status }),
+                    data: __assign$1({}, handlerData.fetchData, { status_code: handlerData.response.status }),
                     level: Severity.Error,
                     type: 'http',
                 }, {
@@ -5156,7 +5234,7 @@ var reporter = (function () {
             else {
                 getCurrentHub().addBreadcrumb({
                     category: 'fetch',
-                    data: __assign({}, handlerData.fetchData, { status_code: handlerData.response.status }),
+                    data: __assign$1({}, handlerData.fetchData, { status_code: handlerData.response.status }),
                     type: 'http',
                 }, {
                     input: handlerData.args,
@@ -5375,7 +5453,7 @@ var reporter = (function () {
                     request.url = request.url || global$4.location.href;
                     request.headers = request.headers || {};
                     request.headers['User-Agent'] = global$4.navigator.userAgent;
-                    return __assign({}, event, { request: request });
+                    return __assign$1({}, event, { request: request });
                 }
                 return event;
             });
@@ -5819,8 +5897,8 @@ var reporter = (function () {
         });
     }
 
-    class ReporterBasic {
-        constructor(options) {
+    var ReporterBasic = (function () {
+        function ReporterBasic(options) {
             this._options = options;
             if (this._options.isAjax) {
                 this._ajax();
@@ -5830,65 +5908,120 @@ var reporter = (function () {
                 this._error();
             this._privacy();
         }
-        _ajax() {
+        ReporterBasic.prototype._ajax = function () {
+            var _this_1 = this;
             proxy({
-                onRequest: (config, handler) => {
+                onRequest: function (config, handler) {
                     handler.next(config);
                 },
-                onError: (err, handler) => {
-                    if (!this._options.filterUrls.includes(err.config.url)) {
-                        console.error(err);
+                onError: function (err, handler) {
+                    if (!_this_1._options.filterUrls.includes(err.config.url)) {
                         console.log('API 错误被捕捉', err.config.url);
-                        this._reportFactory('error', 'API 错误被捕捉', 'Error', err);
+                        _this_1._reportFactory('error', 'API 错误被捕捉', 'Error', err);
                     }
                     handler.reject(err);
                 },
-                onResponse: (response, handler) => {
-                    if (!this._options.filterUrls.includes(response.config.url)) {
-                        const res = this._checkRules(response);
+                onResponse: function (response, handler) {
+                    if (!_this_1._options.filterUrls.includes(response.config.url)) {
+                        var res = _this_1._checkXhrRules(response);
                         if (res) {
                             console.log('API 不符合规则被捕捉', response.config.url);
-                            this._reportFactory('error', 'API 不符合规则被捕捉', 'Response', response);
+                            _this_1._reportFactory('error', 'API 不符合规则被捕捉', 'Response', response);
                         }
                     }
                     handler.next(response);
                 },
             });
-        }
-        _fetch() { }
-        _error() {
-            window.addEventListener('error', (e) => {
-                const data = {
+        };
+        ReporterBasic.prototype._fetch = function () {
+            var _this_1 = this;
+            var intercept = function (response) { return __awaiter(_this_1, void 0, void 0, function () {
+                var _this, reader, stream;
+                return __generator(this, function (_a) {
+                    if (!response.body)
+                        return [2, response];
+                    _this = this;
+                    reader = response.body.getReader();
+                    stream = new ReadableStream({
+                        start: function (controller) {
+                            function push() {
+                                reader.read().then(function (e) {
+                                    var done = e.done, value = e.value;
+                                    var decodedValue = new TextDecoder('utf-8').decode(value);
+                                    if (done) {
+                                        controller.close();
+                                        return;
+                                    }
+                                    try {
+                                        var data = value ? JSON.parse(decodedValue) : {};
+                                        var res = _this._checkFetchRules(response, data);
+                                        if (res) {
+                                            console.log('API 不符合规则被捕捉', response.url);
+                                            _this._reportFactory('error', 'API 不符合规则被捕捉', 'Response', response);
+                                        }
+                                    }
+                                    catch (err) {
+                                        console.log('API 不符合规则被捕捉', response.url);
+                                        _this._reportFactory('error', 'API 不符合规则被捕捉', 'Response', response);
+                                    }
+                                    controller.enqueue(value);
+                                    push();
+                                });
+                            }
+                            push();
+                        },
+                    });
+                    return [2, new Response(stream, {
+                            headers: response.headers,
+                        })];
+                });
+            }); };
+            var originFetch = fetch;
+            Object.defineProperty(window, 'fetch', {
+                configurable: true,
+                enumerable: true,
+                get: function () {
+                    return function (url, options) {
+                        return originFetch(url, __assign({}, options)).then(intercept);
+                    };
+                },
+                set: function () { },
+            });
+        };
+        ReporterBasic.prototype._error = function () {
+            var _this_1 = this;
+            window.addEventListener('error', function (e) {
+                var data = {
                     t: new Date().getTime(),
-                    msg: `${e.target.localName} is load error`,
+                    msg: e.target.localName + " is load error",
                     target: e.target.localName,
                     type: e.type,
                     resourceUrl: e.target.href || e.target.currentSrc,
                 };
-                this._reportFactory('error', '资源加载错误', 'Stack', data);
+                _this_1._reportFactory('error', '资源加载错误', 'Stack', data);
             }, true);
-            window.onerror = (msg, _url, line, col, error) => {
-                setTimeout(() => {
+            window.onerror = function (msg, _url, line, col, error) {
+                setTimeout(function () {
                     col = col || 0;
-                    const data = {
+                    var data = {
                         t: new Date().getTime(),
                         msg: error && error.stack ? error.stack.toString() : msg,
                         resourceUrl: _url,
                         line: line,
                         col: col,
                     };
-                    this._reportFactory('error', '脚本错误', 'Stack', data);
+                    _this_1._reportFactory('error', '脚本错误', 'Stack', data);
                 }, 0);
             };
-            window.addEventListener('unhandledrejection', (e) => {
-                const error = e && e.reason;
-                const message = error.hasOwnProperty('message') ? error.message : '';
-                const stack = error.stack || '';
-                let resourceUrl, col, line;
-                let errs = stack.match(/\(.+?\)/);
+            window.addEventListener('unhandledrejection', function (e) {
+                var error = e && e.reason;
+                var message = error.hasOwnProperty('message') ? error.message : '';
+                var stack = error.stack || '';
+                var resourceUrl, col, line;
+                var errs = stack.match(/\(.+?\)/);
                 if (errs && errs.length) {
                     errs = errs[0];
-                    errs = errs.replace(/\w.+[js|html]/g, ($1) => {
+                    errs = errs.replace(/\w.+[js|html]/g, function ($1) {
                         resourceUrl = $1;
                         return '';
                     });
@@ -5898,57 +6031,59 @@ var reporter = (function () {
                     line = parseInt(errs[1] || 0, 10);
                 if (errs && errs.length > 2)
                     col = parseInt(errs[2] || 0, 10);
-                const data = {
+                var data = {
                     t: new Date().getTime(),
                     msg: message,
                     resourceUrl: resourceUrl,
                     line: col,
                     col: line,
                 };
-                this._reportFactory('error', '异步未处理的错误', 'Stack', data);
+                _this_1._reportFactory('error', '异步未处理的错误', 'Stack', data);
             });
-            const oldError = console.error;
-            console.error = (e) => {
-                setTimeout(() => {
-                    const data = {
+            var _this = this;
+            var oldError = console.error;
+            console.error = function (e) {
+                setTimeout(function () {
+                    var data = {
                         t: new Date().getTime(),
                         msg: e,
                         resourceUrl: location.href,
                     };
-                    this._reportFactory('error', '控制台错误提示', 'Stack', data);
+                    _this._reportFactory('error', '控制台错误提示', 'Stack', data);
                 }, 0);
                 return oldError.apply(console, arguments);
             };
-        }
-        _privacy() {
+        };
+        ReporterBasic.prototype._privacy = function () {
             if (!this._options.usedCookies)
                 return;
-            const res = this._options.usedCookies.map(item => {
-                const reg = new RegExp(`(^| )${item}=([^;]*)(;|$)`);
-                const arr = document.cookie.match(reg);
-                return { [item]: arr ? arr[2] : '' };
+            var res = this._options.usedCookies.map(function (item) {
+                var _a;
+                var reg = new RegExp("(^| )" + item + "=([^;]*)(;|$)");
+                var arr = document.cookie.match(reg);
+                return _a = {}, _a[item] = arr ? arr[2] : '', _a;
             });
             this._reportFactory('info', 'Cookies 记录', 'Cookies', res);
-        }
-        _checkRules(response) {
-            const ruleObject = this._options.apiRules.filter(item => response.config.url.includes(item.url));
+        };
+        ReporterBasic.prototype._checkXhrRules = function (response) {
+            var ruleObject = this._options.apiRules.filter(function (item) { return response.config.url.includes(item.url); });
             if (!ruleObject) {
-                console.error('当前缺少匹配的规则');
+                console.log('当前缺少匹配的规则');
                 return false;
             }
             if (ruleObject.length > 1) {
-                console.error('API 规则定义重复, 将取最先定义项作为规则');
+                console.log('API 规则定义重复, 将取最先定义项作为规则');
             }
-            const rules = ruleObject[0].rules ? ruleObject[0].rules : null;
+            var rules = ruleObject[0].rules ? ruleObject[0].rules : null;
             if (!rules || !Array.isArray(rules))
                 return false;
             if (response.status < 200 || response.status >= 400)
                 return true;
-            const map = new Map(rules.map((item) => [item.name, item.permission]));
-            const rep = JSON.parse(response.response);
-            const match = Object.keys(rep).map(key => {
+            var map = new Map(rules.map(function (item) { return [item.name, item.permission]; }));
+            var rep = JSON.parse(response.response);
+            var match = Object.keys(rep).map(function (key) {
                 if (map.has(key)) {
-                    const permission = map.get(key);
+                    var permission = map.get(key);
                     if (permission && permission.length === 0)
                         return true;
                     if (permission && permission.indexOf(rep[key]) >= 0)
@@ -5957,29 +6092,70 @@ var reporter = (function () {
                         return false;
                 }
             });
-            if (match.some(value => value === false))
+            if (match.some(function (value) { return value === false; }))
                 return true;
             return false;
-        }
-        _reportFactory(type, msg = '', scope = '', data = {}) {
-            setTimeout(() => {
+        };
+        ReporterBasic.prototype._checkFetchRules = function (response, data) {
+            if (data === void 0) { data = {}; }
+            if (Object.keys(data).length === 0)
+                return false;
+            if (response.url.includes('sentry_key'))
+                return false;
+            var ruleObject = this._options.apiRules.filter(function (item) { return response.url.includes(item.url); });
+            if (!ruleObject) {
+                console.log('当前缺少匹配的规则');
+                return false;
+            }
+            if (ruleObject.length > 1) {
+                console.log('API 规则定义重复, 将取最先定义项作为规则');
+            }
+            var rules = ruleObject[0].rules ? ruleObject[0].rules : null;
+            if (!rules || !Array.isArray(rules))
+                return false;
+            if (response.status < 200 || response.status >= 400)
+                return true;
+            var map = new Map(rules.map(function (item) { return [item.name, item.permission]; }));
+            var match = Object.keys(data).map(function (key) {
+                if (map.has(key)) {
+                    var permission = map.get(key);
+                    if (permission && permission.length === 0)
+                        return true;
+                    if (permission && permission.indexOf(data[key]) >= 0)
+                        return true;
+                    else
+                        return false;
+                }
+            });
+            if (match.some(function (value) { return value === false; }))
+                return true;
+            return false;
+        };
+        ReporterBasic.prototype._reportFactory = function (type, msg, scope, data) {
+            if (msg === void 0) { msg = ''; }
+            if (scope === void 0) { scope = ''; }
+            if (data === void 0) { data = {}; }
+            setTimeout(function () {
                 setExtra(scope, data);
                 type === 'error'
                     ? captureException(new Error(msg))
                     : captureMessage(msg);
             }, this._options.timeOut);
-        }
-    }
+        };
+        return ReporterBasic;
+    }());
 
-    class Reporter extends ReporterBasic {
-        constructor(options) {
-            const _filterUrls = [
+    var Reporter = (function (_super) {
+        __extends(Reporter, _super);
+        function Reporter(options) {
+            var _this = this;
+            var _filterUrls = [
                 '/sockjs-node/info',
                 'arms-retcode.aliyuncs.com',
                 'aliyuncs.com',
                 'ynuf.aliapp.org',
             ];
-            const _apiRules = [
+            var _apiRules = [
                 {
                     url: 'guangdianyun.tv',
                     rules: [
@@ -5990,8 +6166,8 @@ var reporter = (function () {
                     ],
                 },
             ];
-            const _usedCookies = ['CONSOLE_TOKEN_GDY'];
-            const _options = {
+            var _usedCookies = ['CONSOLE_TOKEN_GDY'];
+            var _options = {
                 dsn: '',
                 version: '1.0.0',
                 env: '',
@@ -6010,11 +6186,11 @@ var reporter = (function () {
             _options.filterUrls = _options.filterUrls.concat(_filterUrls);
             _options.apiRules = _options.apiRules.concat(_apiRules);
             _options.usedCookies = _options.usedCookies.concat(_usedCookies);
-            super(_options);
-            this.options = _options;
-            console.log(this.options);
-            let environment = '';
-            switch (this.options.env) {
+            _this = _super.call(this, _options) || this;
+            _this.options = _options;
+            console.log(_this.options);
+            var environment = '';
+            switch (_this.options.env) {
                 case 'TEST':
                     environment = 'development';
                     break;
@@ -6029,27 +6205,34 @@ var reporter = (function () {
                     break;
             }
             init({
-                dsn: this.options.dsn,
-                release: this.options.version,
+                dsn: _this.options.dsn,
+                release: _this.options.version,
                 environment: environment,
             });
             setUser({
-                AppId: this.options.appid,
-                Uin: this.options.uin,
-                Name: this.options.name,
+                AppId: _this.options.appid,
+                Uin: _this.options.uin,
+                Name: _this.options.name,
                 Environment: environment,
             });
-            setTag('Uin', String(this.options.uin));
-            setTag('Appid', this.options.appid);
+            setTag('Uin', String(_this.options.uin));
+            setTag('Appid', _this.options.appid);
+            return _this;
         }
-        init(options) {
-            const _options = {
+        Reporter.getInstance = function (options) {
+            if (!this.singleInstance) {
+                this.singleInstance = new Reporter(options);
+            }
+            return this.singleInstance;
+        };
+        Reporter.prototype.init = function (options) {
+            var _options = {
                 dsn: '',
                 version: '1.0.0',
                 env: '',
             };
             Object.assign(_options, options);
-            let environment = '';
+            var environment = '';
             switch (_options.env) {
                 case 'TEST':
                     environment = 'development';
@@ -6069,9 +6252,11 @@ var reporter = (function () {
                 release: _options.version,
                 environment: environment,
             });
-        }
-        setUser(appid, uin, name = '', env = '') {
-            let environment = '';
+        };
+        Reporter.prototype.setUser = function (appid, uin, name, env) {
+            if (name === void 0) { name = ''; }
+            if (env === void 0) { env = ''; }
+            var environment = '';
             switch (env) {
                 case 'TEST':
                     environment = 'development';
@@ -6092,8 +6277,9 @@ var reporter = (function () {
                 Name: name,
                 Environment: environment,
             });
-        }
-        api(appid, uin, msg, data = {}) {
+        };
+        Reporter.prototype.api = function (appid, uin, msg, data) {
+            if (data === void 0) { data = {}; }
             configureScope(function (scope) {
                 scope.setTag('appid', appid);
                 scope.setTag('uin', String(uin));
@@ -6101,9 +6287,11 @@ var reporter = (function () {
             setTag('Uin', String(uin));
             setTag('Appid', appid);
             setExtra('data', data);
-            captureException(new Error(`Api Error:${msg}`));
-        }
-        info(appid, uin, msg = 'Info', data = {}) {
+            captureException(new Error("API \u624B\u52A8\u6355\u6349 " + msg));
+        };
+        Reporter.prototype.info = function (appid, uin, msg, data) {
+            if (msg === void 0) { msg = 'Info'; }
+            if (data === void 0) { data = {}; }
             configureScope(function (scope) {
                 scope.setTag('appid', appid);
                 scope.setTag('uin', String(uin));
@@ -6112,8 +6300,10 @@ var reporter = (function () {
             setTag('Appid', appid);
             setExtra('data', data);
             captureMessage(msg);
-        }
-        error(appid, uin, msg = 'New Error', data = {}) {
+        };
+        Reporter.prototype.error = function (appid, uin, msg, data) {
+            if (msg === void 0) { msg = 'New Error'; }
+            if (data === void 0) { data = {}; }
             configureScope(function (scope) {
                 scope.setTag('appid', appid);
                 scope.setTag('uin', String(uin));
@@ -6122,9 +6312,12 @@ var reporter = (function () {
             setTag('Appid', appid);
             setExtra('data', data);
             captureException(new Error(msg));
-        }
-    }
+        };
+        Reporter.singleInstance = null;
+        return Reporter;
+    }(ReporterBasic));
+    var reporter = function (options) { return Reporter.getInstance(options); };
 
-    return Reporter;
+    return reporter;
 
 }());

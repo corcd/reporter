@@ -71,6 +71,12 @@ class Reporter extends ReporterBasic {
         Sentry.setTag('Uin', String(this.options.uin));
         Sentry.setTag('Appid', this.options.appid);
     }
+    static getInstance(options) {
+        if (!this.singleInstance) {
+            this.singleInstance = new Reporter(options);
+        }
+        return this.singleInstance;
+    }
     init(options) {
         const _options = {
             dsn: '',
@@ -130,7 +136,7 @@ class Reporter extends ReporterBasic {
         Sentry.setTag('Uin', String(uin));
         Sentry.setTag('Appid', appid);
         Sentry.setExtra('data', data);
-        Sentry.captureException(new Error(`Api Error:${msg}`));
+        Sentry.captureException(new Error(`API 手动捕捉 ${msg}`));
     }
     info(appid, uin, msg = 'Info', data = {}) {
         Sentry.configureScope(function (scope) {
@@ -153,4 +159,6 @@ class Reporter extends ReporterBasic {
         Sentry.captureException(new Error(msg));
     }
 }
-export default Reporter;
+Reporter.singleInstance = null;
+const reporter = (options) => Reporter.getInstance(options);
+export default reporter;
