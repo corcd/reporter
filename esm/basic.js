@@ -18,14 +18,14 @@ export default class ReporterBasic {
                 handler.next(config);
             },
             onError: (err, handler) => {
-                if (!this._options.filterUrls.includes(err.config.url)) {
+                if (this._checkUrlLegal(err.config.url)) {
                     console.log('API 错误被捕捉', err.config.url);
                     this._reportFactory('error', 'API 错误被捕捉', 'Error', err);
                 }
                 handler.reject(err);
             },
             onResponse: (response, handler) => {
-                if (!this._options.filterUrls.includes(response.config.url)) {
+                if (this._checkUrlLegal(response.config.url)) {
                     const res = this._checkXhrRules(response);
                     if (res) {
                         console.log('API 不符合规则被捕捉', response.config.url);
@@ -192,6 +192,13 @@ export default class ReporterBasic {
         if (match.some(value => value === false))
             return true;
         return false;
+    }
+    _checkUrlLegal(url) {
+        if (this._options.filterUrls.length === 0) {
+            return true;
+        }
+        const result = this._options.filterUrls.some(item => url.includes(item));
+        return !result;
     }
     _checkFetchRules(response, data = {}) {
         if (Object.keys(data).length === 0)

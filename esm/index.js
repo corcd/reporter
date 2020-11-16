@@ -7,6 +7,7 @@ class Reporter extends ReporterBasic {
             'arms-retcode.aliyuncs.com',
             'aliyuncs.com',
             'ynuf.aliapp.org',
+            'sentry.guangdianyun.tv'
         ];
         const _apiRules = [
             {

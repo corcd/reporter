@@ -2,7 +2,7 @@
  * @Author: Whzcorcd
  * @Date: 2020-10-28 09:12:47
  * @LastEditors: Whzcorcd
- * @LastEditTime: 2020-10-30 17:23:03
+ * @LastEditTime: 2020-11-16 19:07:59
  * @Description: file content
  */
 import * as Sentry from '@sentry/browser'
@@ -19,6 +19,7 @@ class Reporter extends ReporterBasic {
       'arms-retcode.aliyuncs.com',
       'aliyuncs.com',
       'ynuf.aliapp.org',
+      'sentry.guangdianyun.tv'
     ]
     const _apiRules: Array<TApiRules> = [
       {

@@ -1,6 +1,6 @@
 {
   "name": "@gdyfe/reporter",
-  "version": "1.2.12",
+  "version": "1.2.13",
   "description": "Guangdianyun frontend report tool",
   "publishConfig": {
     "access": "public"
@@ -12,7 +12,7 @@
   "private": false,
   "scripts": {
     "complier": "tsc",
-    "build": "rollup --config"
+    "build": "tsc & rollup --config"
   },
   "keywords": [
     "gdyfe",

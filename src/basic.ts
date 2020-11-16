@@ -2,7 +2,7 @@
  * @Author: Whzcorcd
  * @Date: 2020-10-28 09:26:11
  * @LastEditors: Whzcorcd
- * @LastEditTime: 2020-10-30 18:08:01
+ * @LastEditTime: 2020-11-16 19:16:54
  * @Description: file content
  */
 import * as Sentry from '@sentry/browser'
@@ -37,7 +37,7 @@ export default class ReporterBasic {
       },
       // 请求发生错误时进入，比如超时；注意，不包括 http 状态码错误，如 404 仍然会认为请求成功
       onError: (err, handler) => {
-        if (!(<string[]>this._options.filterUrls).includes(err.config.url)) {
+        if (this._checkUrlLegal(err.config.url)) {
           console.log('API 错误被捕捉', err.config.url)
           this._reportFactory('error', 'API 错误被捕捉', 'Error', err)
         }
@@ -45,9 +45,7 @@ export default class ReporterBasic {
       },
       // 请求成功后进入
       onResponse: (response, handler) => {
-        if (
-          !(<string[]>this._options.filterUrls).includes(response.config.url)
-        ) {
+        if (this._checkUrlLegal(response.config.url)) {
           const res = this._checkXhrRules(response)
           if (res) {
             console.log('API 不符合规则被捕捉', response.config.url)
@@ -262,6 +260,16 @@ export default class ReporterBasic {
     })
     if (match.some(value => value === false)) return true
     return false
+  }
+
+  private _checkUrlLegal(url: string): boolean {
+    if ((<string[]>this._options.filterUrls).length === 0) {
+      return true
+    }
+    const result = (<string[]>this._options.filterUrls).some(item =>
+      url.includes(item)
+    )
+    return !result
   }
 
   private _checkFetchRules(response: Response, data: any = {}): boolean {

@@ -5915,14 +5915,14 @@ var reporter = (function () {
                     handler.next(config);
                 },
                 onError: function (err, handler) {
-                    if (!_this_1._options.filterUrls.includes(err.config.url)) {
+                    if (_this_1._checkUrlLegal(err.config.url)) {
                         console.log('API 错误被捕捉', err.config.url);
                         _this_1._reportFactory('error', 'API 错误被捕捉', 'Error', err);
                     }
                     handler.reject(err);
                 },
                 onResponse: function (response, handler) {
-                    if (!_this_1._options.filterUrls.includes(response.config.url)) {
+                    if (_this_1._checkUrlLegal(response.config.url)) {
                         var res = _this_1._checkXhrRules(response);
                         if (res) {
                             console.log('API 不符合规则被捕捉', response.config.url);
@@ -6096,6 +6096,15 @@ var reporter = (function () {
                 return true;
             return false;
         };
+        ReporterBasic.prototype._checkUrlLegal = function (url) {
+            if (this._options.filterUrls.length === 0) {
+                return true;
+            }
+            var result = this._options.filterUrls.some(function (item) {
+                return url.includes(item);
+            });
+            return !result;
+        };
         ReporterBasic.prototype._checkFetchRules = function (response, data) {
             if (data === void 0) { data = {}; }
             if (Object.keys(data).length === 0)
@@ -6154,6 +6163,7 @@ var reporter = (function () {
                 'arms-retcode.aliyuncs.com',
                 'aliyuncs.com',
                 'ynuf.aliapp.org',
+                'sentry.guangdianyun.tv'
             ];
             var _apiRules = [
                 {
