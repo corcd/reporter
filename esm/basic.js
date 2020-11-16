@@ -52,17 +52,19 @@ export default class ReporterBasic {
                                 controller.close();
                                 return;
                             }
-                            try {
-                                const data = value ? JSON.parse(decodedValue) : {};
-                                const res = _this._checkFetchRules(response, data);
-                                if (res) {
+                            if (_this._checkUrlLegal(response.url)) {
+                                try {
+                                    const data = value ? JSON.parse(decodedValue) : {};
+                                    const res = _this._checkFetchRules(response, data);
+                                    if (res) {
+                                        console.log('API 不符合规则被捕捉', response.url);
+                                        _this._reportFactory('error', 'API 不符合规则被捕捉', 'Response', response);
+                                    }
+                                }
+                                catch (err) {
                                     console.log('API 不符合规则被捕捉', response.url);
                                     _this._reportFactory('error', 'API 不符合规则被捕捉', 'Response', response);
                                 }
-                            }
-                            catch (err) {
-                                console.log('API 不符合规则被捕捉', response.url);
-                                _this._reportFactory('error', 'API 不符合规则被捕捉', 'Response', response);
                             }
                             controller.enqueue(value);
                             push();

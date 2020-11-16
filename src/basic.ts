@@ -2,7 +2,7 @@
  * @Author: Whzcorcd
  * @Date: 2020-10-28 09:26:11
  * @LastEditors: Whzcorcd
- * @LastEditTime: 2020-11-16 19:16:54
+ * @LastEditTime: 2020-11-16 19:29:06
  * @Description: file content
  */
 import * as Sentry from '@sentry/browser'
@@ -84,11 +84,22 @@ export default class ReporterBasic {
               }
 
               // console.log(done, decodedValue)
-              try {
-                const data = value ? JSON.parse(decodedValue) : {}
-                const res = _this._checkFetchRules(response, data)
+              if (_this._checkUrlLegal(response.url)) {
+                try {
+                  const data = value ? JSON.parse(decodedValue) : {}
+                  const res = _this._checkFetchRules(response, data)
 
-                if (res) {
+                  if (res) {
+                    console.log('API 不符合规则被捕捉', response.url)
+                    _this._reportFactory(
+                      'error',
+                      'API 不符合规则被捕捉',
+                      'Response',
+                      response
+                    )
+                  }
+                } catch (err) {
+                  // 非 json 返回值
                   console.log('API 不符合规则被捕捉', response.url)
                   _this._reportFactory(
                     'error',
@@ -97,15 +108,6 @@ export default class ReporterBasic {
                     response
                   )
                 }
-              } catch (err) {
-                // 非 json 返回值
-                console.log('API 不符合规则被捕捉', response.url)
-                _this._reportFactory(
-                  'error',
-                  'API 不符合规则被捕捉',
-                  'Response',
-                  response
-                )
               }
               // 取得数据并将它通过 controller 发送给浏览器
               controller.enqueue(value)
